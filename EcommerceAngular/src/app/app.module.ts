@@ -9,6 +9,8 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { ProdutosService } from './services/produtos.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,10 @@ import { PedidosComponent } from './pedidos/pedidos.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ProdutosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
