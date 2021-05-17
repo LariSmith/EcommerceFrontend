@@ -2,6 +2,6 @@ export class ProdutoModel {
   id: number
   nome: string
   descricao: string
-  preco: string
+  preco: number
   estoque: number
 }

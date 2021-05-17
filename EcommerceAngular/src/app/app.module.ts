@@ -10,6 +10,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { ProdutosService } from './services/produtos.service';
+import { PedidoService } from './services/pedido.service';
 import { HttpClientModule } from '@angular/common/http';
 
 import {FormsModule} from '@angular/forms'
@@ -30,7 +31,7 @@ import {FormsModule} from '@angular/forms'
     HttpClientModule,
     FormsModule
   ],
-  providers: [ProdutosService],
+  providers: [ProdutosService, PedidoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

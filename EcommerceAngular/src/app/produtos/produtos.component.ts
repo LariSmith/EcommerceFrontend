@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../services/produtos.service';
-import { ProdutoModel } from '../models/produto.model';
 import { ProdutosPedidosModel } from '../models/produtosPedidos.model'
+import { Router, Data } from '@angular/router';
 
 @Component({
   selector: 'app-produtos',
@@ -11,11 +11,14 @@ import { ProdutosPedidosModel } from '../models/produtosPedidos.model'
 export class ProdutosComponent implements OnInit {
 
   produtos: Array<ProdutosPedidosModel>;
+  produtosCarrinho: Array<Data>;
 
-  constructor(private produtosService: ProdutosService) { }
+  constructor(private produtosService: ProdutosService, public router: Router) { }
 
   ngOnInit(): void {
     this.produtos = new Array<ProdutosPedidosModel>();
+    this.produtosCarrinho = new Array<Data>();
+    ;
     this.listar();
   }
 
@@ -30,7 +33,11 @@ export class ProdutosComponent implements OnInit {
   }
 
   comprar(produto: ProdutosPedidosModel) {
-    console.log(produto);
+    let route = this.router.config.find(r => r.path ===
+      'carrinho/:produtos');
+    route.data = produto;
+
+    this.router.navigateByUrl(`${'carrinho'}/${produto}`);
   }
 
 }
