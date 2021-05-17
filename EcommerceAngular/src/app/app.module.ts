@@ -12,6 +12,8 @@ import { PedidosComponent } from './pedidos/pedidos.component';
 import { ProdutosService } from './services/produtos.service';
 import { HttpClientModule } from '@angular/common/http';
 
+import {FormsModule} from '@angular/forms'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [ProdutosService],
   bootstrap: [AppComponent]

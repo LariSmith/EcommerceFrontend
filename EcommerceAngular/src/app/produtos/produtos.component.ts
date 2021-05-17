@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../services/produtos.service';
+import { ProdutoModel } from '../models/produto.model';
+import { ProdutosPedidosModel } from '../models/produtosPedidos.model'
 
 @Component({
   selector: 'app-produtos',
@@ -8,17 +10,27 @@ import { ProdutosService } from '../services/produtos.service';
 })
 export class ProdutosComponent implements OnInit {
 
-  produtos: Array<any>;
+  produtos: Array<ProdutosPedidosModel>;
 
   constructor(private produtosService: ProdutosService) { }
 
   ngOnInit(): void {
+    this.produtos = new Array<ProdutosPedidosModel>();
     this.listar();
-    console.log(this.produtos);
   }
 
   listar() {
-    this.produtosService.listar().subscribe(res => this.produtos = res);
+    this.produtosService.listar().subscribe(res => {
+      res.forEach((element, index) => {
+        this.produtos[index] = new ProdutosPedidosModel();
+        this.produtos[index].produto = element;
+        this.produtos[index].quantidade = 0;
+      });
+    });
+  }
+
+  comprar(produto: ProdutosPedidosModel) {
+    console.log(produto);
   }
 
 }
