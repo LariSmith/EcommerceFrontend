@@ -18,7 +18,6 @@ export class ProdutosComponent implements OnInit {
   ngOnInit(): void {
     this.produtos = new Array<ProdutosPedidosModel>();
     this.produtosCarrinho = new Array<Data>();
-    ;
     this.listar();
   }
 

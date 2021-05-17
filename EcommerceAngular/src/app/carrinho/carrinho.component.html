@@ -23,18 +23,18 @@
   <br>
   <h2>Formulário Cliente</h2>
   <br>
-  <form>
+  <form #clienteForm (ngSubmit)="onSubmit(cliente)">
     <div class="mb-3">
       <label for="nomeCliente" class="form-label">Nome Completo:</label>
-      <input type="email" class="form-control" id="nomeCliente" [(ngModel)]="cliente.nome">
+      <input type="email" name="nomeCliente" class="form-control" id="nomeCliente" [(ngModel)]="cliente.nome">
     </div>
     <div class="mb-3">
       <label for="cpfCliente" class="form-label">CPF</label>
-      <input type="email" class="form-control" id="cpfCliente" [(ngModel)]="cliente.cpf">
+      <input type="email" name="cpfCliente" class="form-control" id="cpfCliente" [(ngModel)]="cliente.cpf">
     </div>
     <div class="mb-3">
       <label for="clienteEmail" class="form-label">Email</label>
-      <input type="email" class="form-control" id="clienteEmail" [(ngModel)]="cliente.email">
+      <input type="email" name="clienteEmail" class="form-control" id="clienteEmail" [(ngModel)]="cliente.email">
     </div>
     <button type="submit" class="btn btn-primary">Finalizar Compra</button>
   </form>
