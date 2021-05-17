@@ -1,1 +1,27 @@
-<p>pedidos works!</p>
+<br>
+<div class="container">
+  <h1>{{pedidoItem.pedido.cliente.nome}}</h1>
+  <h2>{{pedidoItem.pedido.dataPedido}}</h2>
+  <br>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Preço</th>
+        <th scope="col">Quantidade</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of pedidoItem.itens">
+      <tr>
+        <th scope="row">{{item.produto.id}}</th>
+        <td>{{item.produto.nome}}</td>
+        <td>{{item.produto.preco}}</td>
+        <td>{{item.quantidade}}</td>
+        <td>R$ {{(item.quantidade*item.produto.preco)}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

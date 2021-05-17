@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteModel } from '../models/cliente.model';
 import { PedidoService } from '../services/pedido.service';
 import { PedidoClienteModel } from '../models/pedidoCliente.model';
 import { ProdutosPedidosModel } from '../models/produtosPedidos.model'
 import { ProdutoModel } from '../models/produto.model';
+import { PedidoItemModel } from '../models/pedidoItem.model';
+import { PedidoModel } from '../models/pedido.model';
 
 @Component({
   selector: 'app-carrinho',
@@ -15,8 +17,9 @@ export class CarrinhoComponent implements OnInit {
 
   produtos: ProdutosPedidosModel[];
   cliente: ClienteModel;
+  pedidos: PedidoItemModel;
 
-  constructor(private route: ActivatedRoute, private pedidoService : PedidoService) { }
+  constructor(private route: ActivatedRoute, public router: Router, private pedidoService : PedidoService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
@@ -37,9 +40,17 @@ export class CarrinhoComponent implements OnInit {
     let pedidoCliente : PedidoClienteModel = new PedidoClienteModel();
     pedidoCliente.cliente = data;
     pedidoCliente.itens = this.produtos;
-    this.pedidoService.cadastrarPedido(pedidoCliente).subscribe( res => {
+    this.pedidoService.cadastrarPedido(pedidoCliente).subscribe( (res: PedidoModel) => {
       console.log(res);
-    });
+      let route = this.router.config.find(r => r.path ===
+        'pedidos/:cliente');
+      route.data = res.cliente;
+
+      this.router.navigateByUrl(`${'pedidos'}/${res.cliente}`);
+    }),
+    error => {
+      console.log('ERROR', error);
+    };
   }
 
 }

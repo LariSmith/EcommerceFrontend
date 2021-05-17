@@ -13,7 +13,8 @@ import { ProdutosService } from './services/produtos.service';
 import { PedidoService } from './services/pedido.service';
 import { HttpClientModule } from '@angular/common/http';
 
-import {FormsModule} from '@angular/forms'
+import {FormsModule} from '@angular/forms';
+import { ClienteService } from './services/cliente.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {FormsModule} from '@angular/forms'
     HeaderComponent,
     FooterComponent,
     CarrinhoComponent,
+    PedidosComponent,
     PedidosComponent
   ],
   imports: [
@@ -31,7 +33,7 @@ import {FormsModule} from '@angular/forms'
     HttpClientModule,
     FormsModule
   ],
-  providers: [ProdutosService, PedidoService],
+  providers: [ProdutosService, PedidoService, ClienteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
