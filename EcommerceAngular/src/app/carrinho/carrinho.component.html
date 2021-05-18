@@ -1,1 +1,47 @@
-<p>carrinho works!</p>
+<div class="container">
+  <br>
+  <h1>Carrinho</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Preço</th>
+        <th scope="col">Quantidade</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of produtos; index as i ">
+      <tr>
+        <th scope="row">{{item.produto.id}}</th>
+        <td>{{item.produto.nome}}</td>
+        <td>{{item.produto.preco}}</td>
+        <td>{{item.quantidade}}</td>
+        <td>
+          <button type="button" (click)="remover(item)" class="btn btn-danger">Remover</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <button type="button" (click)="continuarComprando()" class="btn btn-secondary">Continuar Comprando</button>
+  <br><br>
+  <h2>Cliente</h2>
+  <br>
+  <form #clienteForm (ngSubmit)="onSubmit(cliente)">
+    <div class="mb-3">
+      <label for="nomeCliente" class="form-label">Nome Completo:</label>
+      <input type="email" name="nome" class="form-control" id="nomeCliente" required [(ngModel)]="cliente.nome">
+    </div>
+    <div class="mb-3">
+      <label for="cpfCliente" class="form-label">CPF</label>
+      <input type="email" name="cpf" class="form-control" id="cpfCliente" required [(ngModel)]="cliente.cpf">
+    </div>
+    <div class="mb-3">
+      <label for="clienteEmail" class="form-label">Email</label>
+      <input type="email" name="email" class="form-control" id="clienteEmail" required [(ngModel)]="cliente.email">
+    </div>
+    <button [disabled]="produtos[0] == undefined" type="submit" class="btn btn-primary">Finalizar Compra</button>
+  </form>
+
+</div>

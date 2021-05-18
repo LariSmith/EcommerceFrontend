@@ -10,7 +10,12 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { ProdutosService } from './services/produtos.service';
+import { PedidoService } from './services/pedido.service';
 import { HttpClientModule } from '@angular/common/http';
+
+import {FormsModule} from '@angular/forms';
+import { ClienteService } from './services/cliente.service';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -19,15 +24,17 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     FooterComponent,
     CarrinhoComponent,
+    PedidosComponent,
     PedidosComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [ProdutosService],
+  providers: [ProdutosService, PedidoService, ClienteService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

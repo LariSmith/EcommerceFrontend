@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../services/produtos.service';
+import { ProdutosPedidosModel } from '../models/produtosPedidos.model'
+import { Router, Data } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-produtos',
@@ -8,17 +11,36 @@ import { ProdutosService } from '../services/produtos.service';
 })
 export class ProdutosComponent implements OnInit {
 
-  produtos: Array<any>;
+  produtos: Array<ProdutosPedidosModel>;
+  produtosCarrinho: Array<ProdutosPedidosModel>;
 
-  constructor(private produtosService: ProdutosService) { }
+  constructor(private produtosService: ProdutosService, public router: Router, private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.produtos = new Array<ProdutosPedidosModel>();
+    this.produtosCarrinho = new Array<ProdutosPedidosModel>();
     this.listar();
-    console.log(this.produtos);
+
+    this.dataService.produtosCarrinho.subscribe((res: Array<ProdutosPedidosModel>) => {
+      this.produtosCarrinho = res;
+    });
   }
 
   listar() {
-    this.produtosService.listar().subscribe(res => this.produtos = res);
+    this.produtosService.listar().subscribe(res => {
+      res.forEach((element, index) => {
+        this.produtos[index] = new ProdutosPedidosModel();
+        this.produtos[index].produto = element;
+        this.produtos[index].quantidade = 0;
+      });
+    });
+  }
+
+  comprar(produto: ProdutosPedidosModel) {
+    this.produtosCarrinho.push(produto);
+    this.dataService.produtosCarrinho.next(this.produtosCarrinho);
+    const navigationDetails: string[] = ['/carrinho']
+    this.router.navigate(navigationDetails);
   }
 
 }

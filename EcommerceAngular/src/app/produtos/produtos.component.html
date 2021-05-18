@@ -1,36 +1,18 @@
-<div id="carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="https://s.zst.com.br/cms-assets/2021/02/headset-gamer-1-.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://blog.kabum.com.br/wp-content/uploads/2020/07/shutterstock_1430140061-scaled.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://blognerdegeek.com/wp-content/uploads/Pesquisa-Gamer-Twitter-.jpg" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
 <div class="container">
+  <br>
   <h1>Produtos</h1>
   <div class="flex-container">
-    <div *ngFor="let item of produtos" class="produtos-container">
+    <div *ngFor="let item of produtos; index as i" class="produtos-container">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">{{item.nome}}</h5>
-          <p class="card-text">R$ {{item.preco}}</p>
-          <p class="card-text">{{item.descricao}}</p>
-          <p class="card-text">Unidades Restantes: {{item.estoque}}</p>
-          <a href="#" class="btn btn-primary">Comprar</a>
+          <h5 class="card-title">{{item.produto.nome}}</h5>
+          <p class="card-text">R$ {{item.produto.preco}}</p>
+          <p class="card-text">{{item.produto.descricao}}</p>
+          <p class="card-text">Unidades Restantes: {{item.produto.estoque}}</p>
+          <label for="quantity{{i}}">Quantidade:</label>
+          <input type="number" id="quantity{{i}}" name="quantity{{i}}" min="1" max="{{item.produto.estoque}}" [(ngModel)]="produtos[i].quantidade" value="{{item.quantidade}}">
+          <br><br>
+          <button type="button" [disabled]="produtos[i].quantidade == 0" (click)="comprar(item, quantidade)" class="btn btn-primary">Comprar</button>
         </div>
       </div>
     </div>
