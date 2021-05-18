@@ -19,6 +19,7 @@ export class CarrinhoComponent implements OnInit {
   produtos: Array<ProdutosPedidosModel>;
   cliente: ClienteModel;
   pedidos: PedidoItemModel;
+  valorTotalPedido: number = 0
 
   constructor(private route: ActivatedRoute, public router: Router, private pedidoService : PedidoService, private dataService: DataService) { }
 
@@ -26,6 +27,9 @@ export class CarrinhoComponent implements OnInit {
     console.log(this.produtos);
     this.dataService.produtosCarrinho.subscribe((res: Array<ProdutosPedidosModel>) => {
       this.produtos = res;
+      this.produtos.forEach(element => {
+        this.valorTotalPedido += element.produto.preco*element.quantidade;
+      });
     });
     this.cliente = new ClienteModel();
   }
