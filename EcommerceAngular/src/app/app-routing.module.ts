@@ -8,8 +8,8 @@ import { ProdutosComponent } from './produtos/produtos.component';
 const routes: Routes = [
   { path: '', redirectTo: 'produtos', pathMatch: 'full' },
   { path: 'produtos', component: ProdutosComponent },
-  { path: 'carrinho/:produtos', component: CarrinhoComponent },
-  { path: 'pedidos/:cliente', component: PedidosComponent }
+  { path: 'carrinho', component: CarrinhoComponent },
+  { path: 'pedidos', component: PedidosComponent }
 ];
 
 @NgModule({

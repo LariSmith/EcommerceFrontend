@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {FormsModule} from '@angular/forms';
 import { ClienteService } from './services/cliente.service';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { ClienteService } from './services/cliente.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [ProdutosService, PedidoService, ClienteService],
+  providers: [ProdutosService, PedidoService, ClienteService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
